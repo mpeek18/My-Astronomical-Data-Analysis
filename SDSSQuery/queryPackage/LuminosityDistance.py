@@ -2,7 +2,7 @@
 Created on Oct 26, 2018
 
 @author: Matthew Peek
-@change: 24 November 2018
+@change: 26 November 2018
 '''
 from queryPackage.SDSSQuery import SDSSQuery
 from astropy.cosmology import WMAP9 as cosmo
@@ -60,8 +60,9 @@ class LuminosityDistance:
                     lumDist = cosmo.luminosity_distance(self.redshift[i])
                     print("Luminosity Distance for", objectID, "is", lumDist)
         else:
-            print(objectID, "is not a valid object identifier.")
-            print("Try searching for different object ID, expanding radius, or different coordinates.")       
+            raise ValueError(objectID, 'is not a valid object identifier.')
+            #print(objectID, "is not a valid object identifier.")
+            #print("Try searching for different object ID, expanding radius, or different coordinates.")       
     #End luminosityDistance function
     
     """
