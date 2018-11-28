@@ -30,4 +30,4 @@ def switch(longitude, latitude, radiusMultiplier, argv, targetID=None):
         return run.plotMagnitudes(longitude, latitude, radiusMultiplier)
 
 if __name__ == "__main__":
-    switch(143.50993, 55.239775, 12, 3, 98419841984149)    
+    switch(143.50993, 55.239775, 0, 98419841984149)    
