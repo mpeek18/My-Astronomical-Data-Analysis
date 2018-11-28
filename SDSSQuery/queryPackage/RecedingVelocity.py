@@ -8,7 +8,6 @@ import math
 import numpy as np
 from matplotlib import pyplot as plt
 from astropy.cosmology import WMAP9 as cosmo
-#from queryPackage.Error import Error
 from queryPackage.SDSSQuery import SDSSQuery
 
 class RecedingVelocity:
@@ -85,19 +84,18 @@ class RecedingVelocity:
     """
     def velocityVsSpeedOfLight(self, targetID):
         self.computeVelocity()
-        #vPerSpeedOfLight = 0
+        vPerSpeedOfLight = 0
         if (targetID in self.objectID):
             for i in range(0, len(self.objectID)):
                 if (self.objectID[i] == targetID):
                     objectVelocity = self.velocity[i]
                     vPerSpeedOfLight = (objectVelocity / self.c) * 100
             #print()
-            print("Object: " + str(targetID) + " is moving at: " + str(vPerSpeedOfLight) + " % the speed of light", '\n') 
-            
+            print("Object: " + str(targetID) + " is moving at: " + str(vPerSpeedOfLight)
+                   + " % the speed of light", '\n') 
         else:
-            raise ValueError(targetID, 'is not a valid object identifier.')
-            #print()
-            #print(targetID, "is not a valid object identifier.")
+            print()
+            print(targetID, "is not a valid object identifier.")
     #End velocityVsSpeedOfLight function
     
     def viewComputedVelocity(self):
