@@ -31,9 +31,12 @@ class ObjectMagnitudes:
     @return: list of g filter values.
     """
     def getGFilter(self):
-        for i in range(0, len(self.result)):
-            self.gFilter.append(self.result[i]['modelMag_g'])
-        return self.gFilter
+        try:
+            for i in range(0, len(self.result)):
+                self.gFilter.append(self.result[i]['modelMag_g'])
+            return self.gFilter
+        except:
+            return ValueError('No data found for G-Filter')
     #End getGFilter function
     
     """
@@ -41,9 +44,12 @@ class ObjectMagnitudes:
     @return: list of r filter values.
     """
     def getRFilter(self):
-        for i in range(0, len(self.result)):
-            self.rFilter.append(self.result[i]['modelMag_r'])
-        return self.rFilter
+        try:
+            for i in range(0, len(self.result)):
+                self.rFilter.append(self.result[i]['modelMag_r'])
+            return self.rFilter
+        except:
+            return ValueError('No data found for R-Filter')
     #End getRFilter function
     
     """
@@ -66,13 +72,17 @@ class ObjectMagnitudes:
     it gets farther away. Line of best fit is drawn to illustrate trend.
     """
     def plotMagnitudes(self):
-        self.getObjectColors()
-        plt.scatter(self.objectColor, self.gFilter)
-        plt.plot(np.unique(self.objectColor), np.poly1d(np.polyfit(self.objectColor, self.gFilter, 2))
-                 (np.unique(self.objectColor)), c='r')
-        plt.xlabel("Object Color")
-        plt.ylabel("Object Magnitude")
-        plt.show()
+        try:
+            self.getObjectColors()
+            plt.scatter(self.objectColor, self.gFilter)
+            plt.plot(np.unique(self.objectColor), np.poly1d(np.polyfit(self.objectColor, self.gFilter, 2))
+                     (np.unique(self.objectColor)), c='r')
+            plt.xlabel("Object Color")
+            plt.ylabel("Object Magnitude")
+            plt.show()
+        
+        except:
+            print("No data found")
     #End plotMagnitudes function
      
     """
