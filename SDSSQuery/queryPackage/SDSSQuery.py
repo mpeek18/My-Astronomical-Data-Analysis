@@ -41,7 +41,7 @@ class SDSSQuery:
                 self.dec.append(self.result[i]['dec'])
             return self.result
         except:
-            return ValueError("No Results found"'\n'"Try a different search area.")
+            raise ValueError("No Results found"'\n'"Try a different search area.")
     #End standardQuery function
     
     """
@@ -58,7 +58,7 @@ class SDSSQuery:
             self.spectra = SDSS.query_crossid(coord, photoobj_fields=['modelMag_g', 'modelMag_r'])       
             return self.spectra
         except:
-            return ValueError("No Results found"'\n'"Try a different search area.")
+            raise ValueError("No Results found"'\n'"Try a different search area.")
     #End querySpectra function
     
     """
