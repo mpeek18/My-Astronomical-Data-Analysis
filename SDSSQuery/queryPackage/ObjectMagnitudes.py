@@ -24,6 +24,8 @@ class ObjectMagnitudes:
         self.objectColor = []
         self.gFilter = []
         self.rFilter = []
+        self.objectID = []
+        self.objectType = []
     #End ObjectMagnitude constructor
     
     """
@@ -51,6 +53,32 @@ class ObjectMagnitudes:
         except:
             return ValueError('No data found for R-Filter')
     #End getRFilter function
+    
+    """
+    GetObjectID function looks in query result and gets objID column.
+    @return: list of Object ID values. Otherwise returns ValueError.
+    """
+    def getObjectID(self):
+        try:
+            for i in range(0, len(self.result)):
+                self.objectID.append(self.result[i]['objID'])    
+            return self.objectID
+        except:
+            return ValueError('No Data found for Object IDs')
+    #End getObjectID function
+    
+    """
+    GetObjectType function looks in query result and gets Type column.
+    @return: list of object types. Otherwise returns ValueError.
+    """
+    def getObjectType(self):
+        try:
+            for i in range(0, len(self.result)):
+                self.objectType.append(self.result[i]['type'])
+            return self.objectType
+        except:
+            return ValueError('No Data found for Object Type')
+    #End getObjectType function
     
     """
     GetObjectColors function subtracts every value in g filter list from every value
@@ -94,6 +122,8 @@ class ObjectMagnitudes:
         self.plotMagnitudes()
         self.getObjectColors()
         self.getGFilter()
+        self.getObjectID()
+        self.getObjectType()
     #End runObjectMagnitudes function    
             
 """

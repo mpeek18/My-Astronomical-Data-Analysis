@@ -2,7 +2,7 @@
 Created on Oct 25, 2018
 
 @author: Matthew Peek
-@change: 24 November 2018
+@change: 30 November 2018
 '''
 import math
 import numpy as np
@@ -23,6 +23,8 @@ class RecedingVelocity:
     def __init__(self, longitude, latitude, radiusMultiplier):
         self.query = SDSSQuery(longitude, latitude, radiusMultiplier)
         self.result = self.query.standardQuery()
+        self.ra = []
+        self.dec = []
         self.objID = []
         self.redshift = []
         self.velocity = []
@@ -76,6 +78,28 @@ class RecedingVelocity:
     #End computeVelocity function
     
     """
+    GetRA function goes through objectID list matching ra with current objectID.
+    @return: list containing ra's for computed object ID's. Otherwise returns ValueError.
+    """
+    def getRA(self):
+        try:
+            for i in range(0, len(self.objectID)):
+                self.ra.append(self.result[i]['ra'])
+            return self.ra
+        except:
+            return ValueError('RA data not found in query.')
+    #End getRA function
+    
+    def getDec(self):
+        try:
+            for i in range(0, len(self.objectID)):
+                self.dec.append(self.result[i]['dec'])
+            return self.dec
+        except:
+            return ValueError('Dec data not found in query.')
+    #End getDec function
+    
+    """
     Velocity Vs Speed of Light function finds how velocity of object is traveling
     at the speed of light. prints out the object's id and percentage at speed of light.
        
@@ -124,6 +148,9 @@ class RecedingVelocity:
         self.computeVelocity()
         self.viewComputedVelocity()
         self.plotVelocity()
+        self.objectID
+        self.getRA()
+        self.getDec()
     #End runRecedingVelocity function
     
     """
