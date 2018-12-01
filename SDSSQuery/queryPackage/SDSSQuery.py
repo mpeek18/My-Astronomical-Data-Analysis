@@ -24,7 +24,8 @@ class SDSSQuery:
         self.rad = radiusMultiplier * arcmin
         self.position = coords.SkyCoord(longitude, latitude, frame='icrs', unit='deg')             
         self.ra = []
-        self.dec = []    
+        self.dec = []   
+        self.coord = [] 
     #End SDSSQuery constructor
     
     """
@@ -52,10 +53,9 @@ class SDSSQuery:
     def querySpectra(self):
         try:
             self.standardQuery()
-            coord = []
             for i in range(0, len(self.ra)):
-                coord.append(coords.SkyCoord(self.ra[i], self.dec[i], frame='icrs', unit='deg'))
-            self.spectra = SDSS.query_crossid(coord, photoobj_fields=['modelMag_g', 'modelMag_r'])       
+                self.coord.append(coords.SkyCoord(self.ra[i], self.dec[i], frame='icrs', unit='deg'))
+            self.spectra = SDSS.query_crossid(self.coord, photoobj_fields=['modelMag_g', 'modelMag_r'])       
             return self.spectra
         except:
             raise ValueError("No Results found"'\n'"Try a different search area.")
