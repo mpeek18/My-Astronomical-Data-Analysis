@@ -36,12 +36,16 @@ class RunQuery:
         self.result = LuminosityDistance(longitude, latitude, radiusMultiplier)
         return self.result.runLuminosityDistance(targetID)
         
-    def plotMagnitudes(self, latitude, longitude, radiusMultiplier):
-        self.result = ObjectMagnitudes(latitude, longitude, radiusMultiplier)
+    def plotMagnitudes(self, longitude, latitude, radiusMultiplier):
+        self.result = ObjectMagnitudes(longitude, latitude, radiusMultiplier)
         return self.result.runObjectMagnitudes()
+    
+    def magnitudeData(self, longitude, latitude, radiusMultiplier):
+        self.result = ObjectMagnitudes(longitude, latitude, radiusMultiplier)
+        return self.result.writeData()
         
-    def plotHRDiagram(self, latitude, longitude, radiusMultiplier):
-        self.result = HRDiagram(latitude, longitude, radiusMultiplier)
+    def plotHRDiagram(self, longitude, latitude, radiusMultiplier):
+        self.result = HRDiagram(longitude, latitude, radiusMultiplier)
         self.result.runHRDiagram()
         
         

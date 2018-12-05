@@ -2,9 +2,11 @@
 Created on Nov 8, 2018
 
 @author: Matthew Peek
-@change: 24 November 2018
+@change: 5 December 2018
 '''
 import numpy as np
+from astropy.io import ascii
+from astropy.table import Table
 from matplotlib import pyplot as plt
 from queryPackage.SDSSQuery import SDSSQuery
 
@@ -33,12 +35,9 @@ class ObjectMagnitudes:
     @return: list of g filter values.
     """
     def getGFilter(self):
-        try:
-            for i in range(0, len(self.result)):
-                self.gFilter.append(self.result[i]['modelMag_g'])
-            return self.gFilter
-        except:
-            return ValueError('No data found for G-Filter')
+        for i in range(0, len(self.result)):
+            self.gFilter.append(self.result[i]['modelMag_g'])
+        return self.gFilter
     #End getGFilter function
     
     """
@@ -46,12 +45,9 @@ class ObjectMagnitudes:
     @return: list of r filter values.
     """
     def getRFilter(self):
-        try:
-            for i in range(0, len(self.result)):
-                self.rFilter.append(self.result[i]['modelMag_r'])
-            return self.rFilter
-        except:
-            return ValueError('No data found for R-Filter')
+        for i in range(0, len(self.result)):
+            self.rFilter.append(self.result[i]['modelMag_r'])
+        return self.rFilter
     #End getRFilter function
     
     """
@@ -59,12 +55,9 @@ class ObjectMagnitudes:
     @return: list of Object ID values. Otherwise returns ValueError.
     """
     def getObjectID(self):
-        try:
-            for i in range(0, len(self.result)):
-                self.objectID.append(self.result[i]['objID'])    
-            return self.objectID
-        except:
-            return ValueError('No Data found for Object IDs')
+        for i in range(0, len(self.result)):
+            self.objectID.append(self.result[i]['objID'])    
+        return self.objectID
     #End getObjectID function
     
     """
@@ -72,12 +65,9 @@ class ObjectMagnitudes:
     @return: list of object types. Otherwise returns ValueError.
     """
     def getObjectType(self):
-        try:
-            for i in range(0, len(self.result)):
-                self.objectType.append(self.result[i]['type'])
-            return self.objectType
-        except:
-            return ValueError('No Data found for Object Type')
+        for i in range(0, len(self.result)):
+            self.objectType.append(self.result[i]['type'])
+        return self.objectType
     #End getObjectType function
     
     """
@@ -124,8 +114,16 @@ class ObjectMagnitudes:
         self.getGFilter()
         self.getObjectID()
         self.getObjectType()
-    #End runObjectMagnitudes function    
-            
+    #End runObjectMagnitudes function  
+    
+    def writeData(self):  
+        self.getObjectColors()
+        data = (Table([self.getObjectID(), self.gFilter, self.objectColor, self.getObjectType()],
+                names=['Object ID', 'G-Filter', 'Object Colors', 'Object Type']))
+        
+        ascii.write(data, 'MagnitudeData.dat', format='fixed_width', overwrite=True)
+    #End writeData function
+    
 """
 Test ObjectMagnitudes implementation
 

@@ -30,7 +30,9 @@ def switch(longitude, latitude, radiusMultiplier, argv, targetID=None):
         return run.plotMagnitudes(longitude, latitude, radiusMultiplier)
     elif (argv == 6):
         return run.objectVelocityData(longitude, latitude, radiusMultiplier)
+    elif (argv == 7):
+        return run.magnitudeData(longitude, latitude, radiusMultiplier)
 
 if __name__ == "__main__":
-    switch(143.50993, 55.239775, 12, 6, 1237654382516765265)
+    switch(143.50993, 55.239775, 12, 7, 1237654382516765265)
     
