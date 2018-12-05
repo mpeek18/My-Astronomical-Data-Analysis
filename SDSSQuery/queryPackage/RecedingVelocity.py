@@ -2,10 +2,12 @@
 Created on Oct 25, 2018
 
 @author: Matthew Peek
-@change: 30 November 2018
+@change: 5 December 2018
 '''
 import math
 import numpy as np
+from astropy.io import ascii
+from astropy.table import Table
 from matplotlib import pyplot as plt
 from astropy.cosmology import WMAP9 as cosmo
 from queryPackage.SDSSQuery import SDSSQuery
@@ -74,7 +76,7 @@ class RecedingVelocity:
                 velocity = hubbleConstant * hubbleDistance
                 self.velocity.append(velocity)
                 self.objectID.append(self.objID[i])
-        return self.velocity
+        return self.velocity, self.objectID
     #End computeVelocity function
     
     """
@@ -153,6 +155,14 @@ class RecedingVelocity:
         self.getDec()
     #End runRecedingVelocity function
     
+    def writeData(self):
+        self.runRecedingVelocity()
+        data = (Table([self.ra, self.dec, self.objectID, self.redshift], 
+                names=['RA', 'Dec', 'Object ID', 'Redshift']))
+        
+        return ascii.write(data, 'DataFile.dat', format='fixed_width', overwrite=True)
+    #End writeData function
+        
     """
     RunSpeedLightPercent function calls velocityVsSpeedOfLight function and runs it.
     

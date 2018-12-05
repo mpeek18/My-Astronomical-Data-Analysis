@@ -2,7 +2,7 @@
 Created on Nov 16, 2018
 
 @author: Matthew Peek
-@change: 18 November 2018
+@change: 5 December 2018
 '''
 from queryPackage.RunQuery import RunQuery
 
@@ -28,7 +28,9 @@ def switch(longitude, latitude, radiusMultiplier, argv, targetID=None):
         return run.lumDistance(longitude, latitude, radiusMultiplier, targetID)
     elif (argv == 5):
         return run.plotMagnitudes(longitude, latitude, radiusMultiplier)
+    elif (argv == 6):
+        return run.objectVelocityData(longitude, latitude, radiusMultiplier)
 
 if __name__ == "__main__":
-    switch(143.50993, 55.239775, 12, 1, 1237654382516765265)
+    switch(143.50993, 55.239775, 12, 6, 1237654382516765265)
     
