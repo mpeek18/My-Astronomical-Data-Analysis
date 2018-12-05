@@ -84,21 +84,15 @@ class RecedingVelocity:
     @return: list containing ra's for computed object ID's. Otherwise returns ValueError.
     """
     def getRA(self):
-        try:
-            for i in range(0, len(self.objectID)):
-                self.ra.append(self.result[i]['ra'])
-            return self.ra
-        except:
-            return ValueError('RA data not found in query.')
+        for i in range(0, len(self.objectID)):
+            self.ra.append(self.result[i]['ra'])
+        return self.ra
     #End getRA function
     
     def getDec(self):
-        try:
-            for i in range(0, len(self.objectID)):
-                self.dec.append(self.result[i]['dec'])
-            return self.dec
-        except:
-            return ValueError('Dec data not found in query.')
+        for i in range(0, len(self.objectID)):
+            self.dec.append(self.result[i]['dec'])
+        return self.dec
     #End getDec function
     
     """
@@ -156,11 +150,11 @@ class RecedingVelocity:
     #End runRecedingVelocity function
     
     def writeData(self):
-        self.runRecedingVelocity()
-        data = (Table([self.ra, self.dec, self.objectID, self.redshift], 
-                names=['RA', 'Dec', 'Object ID', 'Redshift']))
+        self.computeVelocity()
+        data = (Table([self.getRA(), self.getDec(), self.objectID], 
+                names=['RA', 'Dec', 'Object ID']))
         
-        return ascii.write(data, 'DataFile.dat', format='fixed_width', overwrite=True)
+        ascii.write(data, 'DataFile.dat', format='fixed_width', overwrite=True)
     #End writeData function
         
     """
