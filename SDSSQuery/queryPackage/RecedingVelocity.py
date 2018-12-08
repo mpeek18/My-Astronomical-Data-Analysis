@@ -41,7 +41,7 @@ class RecedingVelocity:
     """ 
     def getID(self):      
         for i in range(0, len(self.result)):
-            self.objID.append(self.result[i]['objid'])                    
+            self.objID.append(self.result[i]['objid'])              
         return self.objID
     #End getID function
     
@@ -75,7 +75,7 @@ class RecedingVelocity:
                 hubbleDistance = (self.c / hubbleConstant) * math.log1p(1 + self.redshift[i])
                 velocity = hubbleConstant * hubbleDistance
                 self.velocity.append(velocity)
-                self.objectID.append(self.objID[i])
+                self.objectID.append(self.objID[i])  
         return self.velocity, self.objectID
     #End computeVelocity function
     
@@ -105,6 +105,7 @@ class RecedingVelocity:
     def velocityVsSpeedOfLight(self, targetID):
         self.computeVelocity()
         vPerSpeedOfLight = 0
+
         if (targetID in self.objectID):
             for i in range(0, len(self.objectID)):
                 if (self.objectID[i] == targetID):
